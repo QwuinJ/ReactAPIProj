@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { Login } from './components/login';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const [user, setUser] = useState();
+	const [username, setUsername] = useState();
+	const [arr, setArr] = useState(['Sarah', 'Gina', 'Katie', 'Harriet']);
+
+	useEffect(() => {
+		fetchReq();
+	}, []);
+
+	const submitHandler = (e) => {
+		e.preventDefault();
+		setUsername(user);
+	};
+
+	const fetchReq = async () => {
+		for (let i = 0; i < 20; i++) {
+			const tempArray = arr;
+			tempArray.push('https://picsum.photos/200');
+		}
+	};
+
+	return (
+		<div className='App'>
+			<h1>{user}</h1>
+			{username ? <h1>Welcome {username}</h1> : <h1>Please Log In</h1>}
+			{username && <h2>Success</h2>}
+			<Login setter={setUser} handler={submitHandler} />
+			{arr.map((item, i) => {
+				return (
+					<div>
+						<p key={i}>{item}</p>;
+						<img src='https://picsum.photos/200' alt='random' />
+					</div>
+				);
+			})}
+		</div>
+	);
+};
 
 export default App;
