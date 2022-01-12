@@ -15,3 +15,20 @@ export const signUpFetch = async (username, email, password) => {
 		console.log(e);
 	}
 };
+
+export const picGetter = async () => {
+	try {
+		const response = await fetch('https://picsum.photos/v2/list', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		console.log(response);
+		const info = await response.json();
+		console.log(info);
+		return info;
+	} catch (err) {
+		console.log(err);
+	}
+};

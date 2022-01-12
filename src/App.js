@@ -1,42 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Login } from './components/login';
-import { signUpFetch } from './utils';
+import PicBox from './components/PicBox';
+import { picGetter } from './utils';
 
 const App = () => {
-	const [user, setUser] = useState();
-	const [username, setUsername] = useState();
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
+	const [pic, setPic] = useState([]);
 
-	const signUpHandler = (e) => {
-		e.preventDefault();
-		const returnValue = signUpFetch(username, email, password);
-		console.log(returnValue);
+	const picHandler = async () => {
+		try {
+			const result = await picGetter();
+			console.log(result);
+			setPic(result);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
-		<div className='App'>
-			<h1>{user}</h1>
-			{user ? (
-				<form onSubmit={signUpHandler}>
-					<input
-						onChange={(e) => setUsername(e.target.value)}
-						placeholder='Username'
-					/>
-					<input
-						onChange={(e) => setEmail(e.target.value)}
-						placeholder='Email'
-					/>
-					<input
-						onChange={(e) => setPassword(e.target.value)}
-						placeholder='Password'
-					/>
-					<button type='submit'>Submit</button>
-				</form>
-			) : (
-				<h2>You are not logged in</h2>
-			)}
+		<div className='site-wrapper' onLoad={picHandler()}>
+			<div className='top-header'>
+				<h1>InstaClone</h1>
+			</div>
+			<div className='main-content'>
+				<div className='left-col'>
+					<p>Box one</p>
+					<p>Box two</p>
+					<p>Box three</p>
+				</div>
+				<div className='main-col'>
+					{pic.map((p, index) => {
+						return (
+							<PicBox
+								key={index}
+								url={p.download_url}
+								id={p.id}
+								author={p.author}
+							/>
+						);
+					})}
+				</div>
+				<div className='right-col'>
+					<p>Box one</p>
+					<p>Box two</p>
+					<p>Box three</p>
+				</div>
+			</div>
 		</div>
 	);
 };

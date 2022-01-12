@@ -1,0 +1,16 @@
+.pic-box {
+	width: 500px;
+	height: fit-content;
+	max-height: 800px;
+	padding: 10px;
+}
+
+.pic-box-header {
+	font-size: larger;
+	font-weight: bold;
+}
+
+.pic-box-caption {
+	text-align: justify;
+	text-justify: inter-word;
+}
