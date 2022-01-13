@@ -4,6 +4,10 @@ img {
 	object-fit: cover;
 }
 
+.log-in-form {
+	width: 600px;
+}
+
 .top-header {
 	text-align: center;
 }

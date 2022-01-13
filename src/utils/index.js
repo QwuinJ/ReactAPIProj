@@ -1,7 +1,7 @@
 export const signUpFetch = async (username, email, password) => {
 	try {
 		const response = await fetch(`${process.env.REACT_APP_REST_API}user`, {
-			method: 'POST',
+			method: 'GET',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				username,
